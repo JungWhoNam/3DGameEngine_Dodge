@@ -19,7 +19,9 @@ public class PlayerController : MonoBehaviour
         float xSpeed = xInput * speed;
         float zSpeed = yInput * speed;
 
-        Vector3 newVelocity = new Vector3(xSpeed, 0, zSpeed);
+        float ySpeed = playerRigidbody.linearVelocity.y;
+
+        Vector3 newVelocity = new Vector3(xSpeed, ySpeed, zSpeed);
         playerRigidbody.linearVelocity = newVelocity;
 
         //if (Input.GetKey(KeyCode.UpArrow) == true)
