@@ -78,4 +78,9 @@ public class PlayerController : MonoBehaviour
         health += amt;
     }
 
+    public int GetHealth()
+    {
+        return health;
+    }
+
 }

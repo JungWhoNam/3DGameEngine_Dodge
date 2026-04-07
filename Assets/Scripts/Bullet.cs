@@ -26,6 +26,8 @@ public class Bullet : MonoBehaviour
             if (controller != null)
             {
                 controller.Die();
+                //gameObject.SetActive(false);
+                Destroy(gameObject);
             }
         }
     }
