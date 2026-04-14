@@ -15,7 +15,14 @@ public class Bullet : MonoBehaviour
 
     void Update()
     {
-        
+
+        PlayerController playerController = FindFirstObjectByType<PlayerController>();
+        if (playerController != null) { 
+            // 총알이 Player를 따라가게 구현
+            Vector3 dir = playerController.transform.position - transform.position;
+            // 방법 #2
+            bulletRigidbody.linearVelocity = dir.normalized * speed;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
