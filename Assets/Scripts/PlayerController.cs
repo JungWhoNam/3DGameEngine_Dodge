@@ -23,8 +23,13 @@ public class PlayerController : MonoBehaviour
 
         float ySpeed = playerRigidbody.linearVelocity.y;
 
-        Vector3 newVelocity = new Vector3(xSpeed, ySpeed, zSpeed);
-        playerRigidbody.linearVelocity = newVelocity;
+        // Option #1: Rigidbody 사용
+        //Vector3 newVelocity = new Vector3(xSpeed, ySpeed, zSpeed);
+        //playerRigidbody.linearVelocity = newVelocity;
+
+        // Option #2: transform.position 사용
+        Vector3 newVelocity = new Vector3(xSpeed, playerRigidbody.linearVelocity.y, zSpeed);
+        transform.position += newVelocity * Time.deltaTime;
 
         //if (Input.GetKey(KeyCode.UpArrow) == true)
         //{
@@ -58,6 +63,13 @@ public class PlayerController : MonoBehaviour
     {
         health -= 1;
 
+        Color c = new Color(
+            0 * health / 3f,
+            100f / 255f * health / 3f,
+            164f / 255f * health / 3f
+        );
+        GetComponent<MeshRenderer>().material.color = c;
+
         if (health <= 0)
         {
             // 자신의 게임 오브젝트를 비활성화
@@ -76,6 +88,13 @@ public class PlayerController : MonoBehaviour
         if (amt <= 0) return;
 
         health += amt;
+
+        Color c = new Color(
+            0 * health / 3f,
+            100f / 255f * health / 3f,
+            164f / 255f * health / 3f
+        );
+        GetComponent<MeshRenderer>().material.color = c;
     }
 
     public int GetHealth()
