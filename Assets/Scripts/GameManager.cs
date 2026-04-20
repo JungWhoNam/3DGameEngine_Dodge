@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 
     public PlayerController playerController;
 
+    public GameObject itemPrefab; // 아이템 프리팹 할당 변수
+
     private float surviveTime; // 생존 시간
     private bool isGameover; // 게임 오버 상태
 
@@ -19,11 +21,32 @@ public class GameManager : MonoBehaviour
         // 생존 시간과 게임 오버 상태를 초기화
         surviveTime = 0;
         isGameover = false;
+
+        int spawnCount = Random.Range(1, 4);
+        
+        for (int i = 0; i < spawnCount; i++)
+        {
+            float randX = Random.Range(-8f, 8f);
+            float randZ = Random.Range(-8f, 8f);
+            Vector3 spawnPos = new Vector3(randX, 0.5f, randZ);
+
+            Instantiate(itemPrefab, spawnPos, Quaternion.identity);
+        }
     }
 
     void Update()
     {
         hpText.text = "HP: " + playerController.GetHealth();
+
+        if (playerController.GetHealth() == 1)
+        {
+            hpText.text += " (!!!)";
+            hpText.color = Color.red;
+        }
+        else
+        {
+            hpText.color = Color.white;
+        }
 
         // 게임 오버가 아닌 동안
         if (!isGameover)

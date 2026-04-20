@@ -23,13 +23,19 @@ public class PlayerController : MonoBehaviour
 
         float ySpeed = playerRigidbody.linearVelocity.y;
 
-        // Option #1: Rigidbody 사용
-        //Vector3 newVelocity = new Vector3(xSpeed, ySpeed, zSpeed);
-        //playerRigidbody.linearVelocity = newVelocity;
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            xSpeed *= 2;
+            zSpeed *= 2;
+        }
 
+        // Option #1: Rigidbody 사용
+        Vector3 newVelocity = new Vector3(xSpeed, ySpeed, zSpeed);
+        playerRigidbody.linearVelocity = newVelocity;
+        
         // Option #2: transform.position 사용
-        Vector3 newVelocity = new Vector3(xSpeed, playerRigidbody.linearVelocity.y, zSpeed);
-        transform.position += newVelocity * Time.deltaTime;
+        //Vector3 newVelocity = new Vector3(xSpeed, playerRigidbody.linearVelocity.y, zSpeed);
+        //transform.position += newVelocity * Time.deltaTime;
 
         //if (Input.GetKey(KeyCode.UpArrow) == true)
         //{
