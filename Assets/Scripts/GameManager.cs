@@ -4,6 +4,8 @@ using TMPro; // TextMeshPro 라이브러리
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager instance; // 싱글턴을 할당할 전역 변수
+
     public GameObject gameoverText; // 게임오버시 활성화 할 텍스트 게임 오브젝트
     public TMP_Text timeText; // 생존 시간을 표시할 텍스트 컴포넌트
     public TMP_Text recordText; // 최고 기록을 표시할 텍스트 컴포넌트
@@ -15,6 +17,17 @@ public class GameManager : MonoBehaviour
 
     private float surviveTime; // 생존 시간
     private bool isGameover; // 게임 오버 상태
+
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else
+        {
+            Debug.LogWarning("씬에 두 개 이상의 게임 매니저가 존재합니다.");
+            Destroy(gameObject);
+        }
+    }
 
     void Start()
     {
